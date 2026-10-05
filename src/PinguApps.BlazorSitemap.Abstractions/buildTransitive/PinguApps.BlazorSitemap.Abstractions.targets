@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <BlazorSitemapTrackSourceChanges Condition="'$(BlazorSitemapTrackSourceChanges)' == ''">true</BlazorSitemapTrackSourceChanges>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Update="**/*.razor.sitemap.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" Pack="false" />
+    <None Update="**/*.razor.sitemap.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" Pack="false" />
+  </ItemGroup>
+  <UsingTask TaskName="BlazorSitemapSourceTask" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <Task>
+      <Code Type="Class" Language="cs" Source="$(MSBuildThisFileDirectory)BlazorSitemapSourceTask.cs" />
+    </Task>
+  </UsingTask>
+  <Target Name="BlazorSitemapTrackSources" BeforeTargets="CoreCompile" Condition="'$(DesignTimeBuild)' != 'true' And '$(BlazorSitemapTrackSourceChanges)' == 'true' And '@(RazorComponent)' != ''">
+    <BlazorSitemapSourceTask Sources="@(RazorComponent)" ProjectDirectory="$(MSBuildProjectDirectory)" OutputFile="$(IntermediateOutputPath)BlazorSitemap.SourceFreshness.g.cs" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)BlazorSitemap.SourceFreshness.g.cs" />
+      <FileWrites Include="$(IntermediateOutputPath)BlazorSitemap.SourceFreshness.g.cs" />
+    </ItemGroup>
+  </Target>
+</Project>

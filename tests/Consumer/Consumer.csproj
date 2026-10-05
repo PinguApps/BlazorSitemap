@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.0</SitemapPackageVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.12" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
+    <ProjectReference Include="../Consumer.Client/Consumer.Client.csproj" />
+    <PackageReference Include="PinguApps.BlazorSitemap" Version="$(SitemapPackageVersion)" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="PinguApps.BlazorSitemap" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
+    <ProjectReference Include="../Consumer.Library/Consumer.Library.csproj" />
+  </ItemGroup>
+</Project>

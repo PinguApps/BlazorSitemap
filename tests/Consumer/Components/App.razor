@@ -1,0 +1,30 @@
+@inject SitemapOptions Sitemap
+@using Consumer.Components.Pages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="@(Sitemap.PublicBaseUrl.TrimEnd('/') + "/")" />
+    <HeadOutlet />
+    <style>body{font:18px system-ui;max-width:850px;margin:3rem auto;padding:1rem;color:#18333b}a{color:#036b71}nav{display:flex;gap:1rem;flex-wrap:wrap}button{padding:.6rem;margin:.4rem}article{border-bottom:1px solid #ccc;padding:1rem 0}</style>
+</head>
+<body>
+    <nav>
+        <a href="@DemoNavigation.To(typeof(Home), Sitemap.PublicBaseUrl)">Home</a>
+        <a href="@DemoNavigation.To(typeof(About), Sitemap.PublicBaseUrl)">About</a>
+        @foreach (SitemapLocale locale in SupportedLocales.All)
+        {
+            <a href="@DemoNavigation.To(typeof(Counter), Sitemap.PublicBaseUrl, new Dictionary<string, string?> { ["locale"] = locale.RouteValue })">@locale.Language</a>
+        }
+        <a href="@DemoNavigation.To(typeof(BlogIndex), Sitemap.PublicBaseUrl)">Blog</a>
+        <a href="sitemap.xml" data-enhance-nav="false">Sitemap XML</a>
+        <a href="@DemoNavigation.To(typeof(Consumer.Library.LibraryPage), Sitemap.PublicBaseUrl)">Library page</a>
+        <a href="@DemoNavigation.To(typeof(Consumer.Client.AutoPage), Sitemap.PublicBaseUrl)">Auto rendering</a>
+    </nav>
+    <Router AppAssembly="typeof(App).Assembly" AdditionalAssemblies="new[] { typeof(Consumer.Library.LibraryPage).Assembly, typeof(Consumer.Client.AutoPage).Assembly }">
+        <Found Context="routeData"><RouteView RouteData="routeData" /></Found>
+    </Router>
+    <script src="_framework/blazor.web.js"></script>
+</body>
+</html>

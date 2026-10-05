@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PinguApps.BlazorSitemap.Abstractions/PinguApps.BlazorSitemap.Abstractions.csproj" />
+    <Project Path="src/PinguApps.BlazorSitemap/PinguApps.BlazorSitemap.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PinguApps.BlazorSitemap.Tests/PinguApps.BlazorSitemap.Tests.csproj" />
+  </Folder>
+</Solution>

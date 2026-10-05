@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>PinguApps.BlazorSitemap</PackageId>
+    <AssemblyName>PinguApps.BlazorSitemap</AssemblyName>
+    <RootNamespace>PinguApps.BlazorSitemap</RootNamespace>
+    <Version>1.0.0</Version>
+    <Description>Canonical XML sitemaps for server-hosted Blazor, with compiled route discovery, localization, runtime content and automatic partitioning.</Description>
+    <PackageTags>blazor;sitemap;seo;localization</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PinguApps.BlazorSitemap.Abstractions/PinguApps.BlazorSitemap.Abstractions.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>
