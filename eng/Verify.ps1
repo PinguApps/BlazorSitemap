@@ -7,8 +7,9 @@ Push-Location $repoRoot
 try {
     $feed = Join-Path $repoRoot 'artifacts/packages'
     New-Item -ItemType Directory -Force $feed | Out-Null
-    dotnet pack src/PinguApps.BlazorSitemap.Abstractions -c Release -o artifacts/packages "-p:PackageVersion=$PackageVersion"
-    dotnet pack src/PinguApps.BlazorSitemap -c Release -o $feed "-p:PackageVersion=$PackageVersion" "-p:ContinuousIntegrationBuild=$([bool]$env:CI)"
+    $ci = "-p:ContinuousIntegrationBuild=$($env:CI -eq 'true')"
+    dotnet pack src/PinguApps.BlazorSitemap.Abstractions -c Release -o $feed "-p:PackageVersion=$PackageVersion" $ci
+    dotnet pack src/PinguApps.BlazorSitemap -c Release -o $feed "-p:PackageVersion=$PackageVersion" $ci
     $config = Join-Path $repoRoot 'artifacts/consumer.NuGet.Config'
     $escapedFeed = [System.Security.SecurityElement]::Escape($feed)
     @"
