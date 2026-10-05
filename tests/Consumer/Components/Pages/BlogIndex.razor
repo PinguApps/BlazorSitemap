@@ -1,0 +1,17 @@
+@page "/blog"
+@attribute [SitemapPage(DynamicContent = true)]
+@inject BlogStore Store
+@inject SitemapOptions Sitemap
+<PageTitle>Blog</PageTitle>
+<h1>Published articles</h1>
+<p>Collection publication timestamp: @Store.CollectionPublishedAtUtc.ToString("O")</p>
+@foreach (Article article in Store.Published())
+{
+    <article><a href="@DemoNavigation.To(typeof(BlogPost), Sitemap.PublicBaseUrl, new Dictionary<string, string?> { ["locale"] = article.Locale, ["slug"] = article.Slug })">@article.Title</a> (@article.Locale)<p>@article.Body</p></article>
+}
+<h2>Runtime content controls</h2>
+<p>Available in Development. Each operation commits a publication event and invalidates the sitemap cache.</p>
+@foreach (string operation in new[] { "edit", "add", "unpublish", "delete" })
+{
+    <form method="post" action="@($"demo/{operation}")"><button type="submit">@operation</button></form>
+}

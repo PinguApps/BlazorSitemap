@@ -1,0 +1,73 @@
+name: Publish NuGet Packages
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+
+      - name: Resolve package version
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          if ($env:RELEASE_TAG -notmatch '^v(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)$') { throw 'Release tag must be v<SemVer>.' }
+          "PACKAGE_VERSION=$($Matches[1])" >> $env:GITHUB_ENV
+
+      - name: Verify packed NuGet consumers
+        shell: pwsh
+        run: ./eng/Verify.ps1 -PackageVersion "${{ env.PACKAGE_VERSION }}"
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: packages
+          path: artifacts/packages/*
+
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish Packages
+        run: >
+          dotnet nuget push "artifacts/packages/*.nupkg"
+          --api-key ${{steps.login.outputs.NUGET_API_KEY}}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
+
+      - name: Publish symbols
+        run: >
+          dotnet nuget push "artifacts/packages/*.snupkg"
+          --api-key ${{steps.login.outputs.NUGET_API_KEY}}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.0</SitemapPackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Version="$(SitemapPackageVersion)" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
+  </ItemGroup>
+</Project>

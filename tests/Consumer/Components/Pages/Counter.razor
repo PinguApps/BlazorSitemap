@@ -1,0 +1,8 @@
+@page "/{locale}/counter"
+@attribute [SitemapPage(Hreflang = true)]
+<PageTitle>@(Locale == "cy-gb" ? "Rhifydd" : "Counter")</PageTitle>
+<h1>@(Locale == "cy-gb" ? "Rhifydd" : "Counter")</h1>
+<p>@(Locale == "cy-gb" ? "Croeso i'r dudalen Gymraeg." : "Welcome to the English page.")</p>
+@code {
+    [Parameter] public string Locale { get; set; } = "";
+}

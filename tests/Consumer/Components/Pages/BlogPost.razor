@@ -1,0 +1,18 @@
+@page "/{locale}/blog/{slug}"
+@attribute [SitemapPage(Hreflang = true)]
+@inject BlogStore Store
+@if (Current is { } article)
+{
+    <PageTitle>@article.Title</PageTitle>
+    <h1>@article.Title</h1><p>@article.Body</p><p>Updated: @article.UpdatedAtUtc.ToString("O")</p>
+}
+else
+{
+    <HeadContent><meta name="robots" content="noindex" /></HeadContent>
+    <h1>Article unavailable</h1>
+}
+@code {
+    [Parameter] public string Locale { get; set; } = "";
+    [Parameter] public string Slug { get; set; } = "";
+    private Article? Current => Store.Published().FirstOrDefault(x => x.Locale == Locale && x.Slug == Slug);
+}

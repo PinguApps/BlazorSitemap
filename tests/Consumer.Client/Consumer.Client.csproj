@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.0</SitemapPackageVersion>
+    <IsPackable>false</IsPackable>
+    <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.12" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
+    <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Version="$(SitemapPackageVersion)" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
+  </ItemGroup>
+</Project>

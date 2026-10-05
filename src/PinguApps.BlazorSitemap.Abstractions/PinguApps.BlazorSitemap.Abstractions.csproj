@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>PinguApps.BlazorSitemap.Abstractions</PackageId>
+    <RootNamespace>PinguApps.BlazorSitemap</RootNamespace>
+    <Version>1.0.0</Version>
+    <Description>Browser-compatible page metadata and source freshness tracking for PinguApps.BlazorSitemap.</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="buildTransitive/**/*.cs" />
+    <None Include="buildTransitive/**/*" Pack="true" PackagePath="buildTransitive/" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

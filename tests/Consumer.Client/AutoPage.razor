@@ -1,0 +1,14 @@
+@page "/auto"
+@using Microsoft.AspNetCore.Components.Web
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using PinguApps.BlazorSitemap
+@attribute [SitemapPage]
+@rendermode InteractiveAuto
+<PageTitle>Auto rendering</PageTitle>
+<h1>Auto rendering from the client assembly</h1>
+<p>This component first renders on the server and can run in WebAssembly afterwards.</p>
+<button @onclick="Increment">Count: @count</button>
+@code {
+    private int count;
+    private void Increment() => count++;
+}

@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.0</SitemapPackageVersion>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="PinguApps.BlazorSitemap" Version="$(SitemapPackageVersion)" />
+    <PackageVersion Include="PinguApps.BlazorSitemap.Abstractions" Version="$(SitemapPackageVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.12" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+    <PackageVersion Include="Reqnroll.xunit.v3" Version="3.3.4" />
+    <PackageVersion Include="xunit.v3" Version="4.0.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="10.0.12" />
+  </ItemGroup>
+</Project>
