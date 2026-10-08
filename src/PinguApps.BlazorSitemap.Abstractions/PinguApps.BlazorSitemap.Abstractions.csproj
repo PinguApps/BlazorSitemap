@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>PinguApps.BlazorSitemap.Abstractions</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
     <RootNamespace>PinguApps.BlazorSitemap</RootNamespace>
     <Version>1.0.0</Version>
     <Description>Browser-compatible page metadata and source freshness tracking for PinguApps.BlazorSitemap.</Description>
@@ -13,5 +14,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components" />
     <None Include="../../README.md" Pack="true" PackagePath="/" />
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>
