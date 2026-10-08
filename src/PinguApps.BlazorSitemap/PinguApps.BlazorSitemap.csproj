@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>PinguApps.BlazorSitemap</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
     <AssemblyName>PinguApps.BlazorSitemap</AssemblyName>
     <RootNamespace>PinguApps.BlazorSitemap</RootNamespace>
     <Version>1.0.0</Version>
@@ -14,5 +15,8 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <None Include="../../README.md" Pack="true" PackagePath="/" />
     <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>
