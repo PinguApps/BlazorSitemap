@@ -7,7 +7,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.12" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.13" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
     <ProjectReference Include="../Consumer.Client/Consumer.Client.csproj" />
     <PackageReference Include="PinguApps.BlazorSitemap" Version="$(SitemapPackageVersion)" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />

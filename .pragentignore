@@ -1,0 +1,6 @@
+# PR Agent review exclusions use Git ignore syntax independently of .gitignore.
+# No exclusions are currently justified; all tracked files remain reviewable.
+# Keep .razor.sitemap.json state reviewable: its dates preserve source history.
+# Package icon.png files are approved original assets, not generated exports.
+# Use $pragent-ignore to assess future outputs and validate narrow exclusions.
+# Exclusions never replace build, generation or visual validation.
