@@ -8,7 +8,7 @@
     <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.12" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.13" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
     <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Version="$(SitemapPackageVersion)" Condition="'$(ManagePackageVersionsCentrally)' != 'true'" />
     <PackageReference Include="PinguApps.BlazorSitemap.Abstractions" Condition="'$(ManagePackageVersionsCentrally)' == 'true'" />
