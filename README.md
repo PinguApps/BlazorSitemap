@@ -99,6 +99,22 @@ Submit the public sitemap URL to Search Console, or add this to your site's `rob
 Sitemap: https://www.example.com/sitemap.xml
 ```
 
+## Choose trailing slashes
+
+Page URLs omit trailing slashes by default (`AppendTrailingSlash = false`): `/about/` becomes `/about`. To append exactly one slash instead, set this inside the sitemap options callback:
+
+```csharp
+options.AppendTrailingSlash = true;
+```
+
+This applies to discovered pages, component-provider entries, fixed standalone URLs, runtime URL providers, reciprocal language alternatives and `x-default`. Slash variants with equal metadata deduplicate; conflicting ownership or dates still fail. Query strings and escaped path segments are preserved: `/reports/?edition=1&next=/` becomes `/reports?edition=1&next=/` by default, or stays `/reports/?edition=1&next=/` when enabled.
+
+The domain root stays `/` in both modes. Application path bases stay intact: the home page at `https://www.example.com/portal/` becomes `https://www.example.com/portal` by default, or keeps one final slash when enabled. Sitemap document addresses remain `/sitemap.xml` and `/sitemap-{hash-prefix}.xml`, including any mount.
+
+**Make your application's redirects and HTML canonical tags agree with the selected policy.** This option changes advertised page addresses; configure the application's serving and redirect rules separately.
+
+The [working consumer](tests/Consumer/DemoHost.cs) reads `Sitemap:AppendTrailingSlash`, defaulting to `false`. For example, add `--Sitemap:AppendTrailingSlash true` after `--` when running the demo, or set `Sitemap__AppendTrailingSlash=true` in its environment.
+
 ## Static dates: build it and keep the history
 
 For a page marked `[SitemapPage]`, the build hashes its `.razor` file and optional `.razor.cs`. It saves the hash and UTC date beside the page, in a file such as `About.razor.sitemap.json`:

@@ -57,5 +57,5 @@ Feature: A Blazor application independently consumes the packed package
     And public base URL "https://public.example/portal"
     And the application path base is "/portal"
     When the sitemap is requested
-    Then all canonical URLs start with "https://public.example/portal/"
+    Then all canonical URLs start with "https://public.example/portal"
     And every advertised page renders successfully

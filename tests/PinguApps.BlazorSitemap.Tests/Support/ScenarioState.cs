@@ -30,6 +30,7 @@ public sealed class ScenarioState
     public int LifetimeSeconds { get; set; } = 300;
     public bool RequireFreshness { get; set; }
     public bool IsConsumer { get; set; }
+    public bool? ConsumerAppendTrailingSlash { get; set; }
     public bool DuplicateFreshness { get; set; }
     public bool UseConsumerSourceEstimates { get; set; } = true;
     public Exception? Error { get; set; }
@@ -48,7 +49,12 @@ public sealed class ScenarioState
             if (IsConsumer)
             {
                 string root = RepositoryRoot();
-                App = DemoHost.Create(["--contentRoot", Path.Combine(root, "tests", "Consumer"), "--environment", "Development", "--Sitemap:PublicBaseUrl", BaseUrl, "--Sitemap:UseSourceLastModified", UseConsumerSourceEstimates.ToString()], builder =>
+                List<string> args = ["--contentRoot", Path.Combine(root, "tests", "Consumer"), "--environment", "Development", "--Sitemap:PublicBaseUrl", BaseUrl, "--Sitemap:UseSourceLastModified", UseConsumerSourceEstimates.ToString()];
+                if (ConsumerAppendTrailingSlash is not null)
+                {
+                    args.AddRange(["--Sitemap:AppendTrailingSlash", ConsumerAppendTrailingSlash.Value.ToString()]);
+                }
+                App = DemoHost.Create(args.ToArray(), builder =>
                 {
                     builder.WebHost.UseTestServer();
                     builder.Logging.ClearProviders();
