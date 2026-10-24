@@ -25,7 +25,10 @@ public sealed record SitemapUrlEntry(string Location, SitemapLastModified LastMo
         string candidate = Location.StartsWith('/') ? baseUrl.AbsoluteUri + Location[1..] : Location;
         if (!Uri.TryCreate(candidate, UriKind.Absolute, out Uri? url) ||
             (url.Scheme != Uri.UriSchemeHttp && url.Scheme != Uri.UriSchemeHttps) || url.UserInfo.Length != 0 ||
-            url.Fragment.Length != 0 || !url.AbsoluteUri.StartsWith(baseUrl.AbsoluteUri, StringComparison.Ordinal) || url.AbsoluteUri.Length >= 2048)
+            url.Fragment.Length != 0 ||
+            (!url.AbsoluteUri.StartsWith(baseUrl.AbsoluteUri, StringComparison.Ordinal) &&
+                !url.GetLeftPart(UriPartial.Path).Equals(baseUrl.AbsoluteUri.TrimEnd('/'), StringComparison.Ordinal)) ||
+            url.AbsoluteUri.Length >= 2048)
         {
             throw new InvalidOperationException($"Standalone sitemap URL '{Location}' must be a well-formed escaped URL under PublicBaseUrl and be shorter than 2048 characters.");
         }

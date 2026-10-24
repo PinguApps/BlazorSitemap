@@ -213,7 +213,24 @@ internal sealed class RouteCatalog
             throw new InvalidOperationException($"{page.PageType.Name}: generated canonical URL must remain under PublicBaseUrl and be shorter than 2048 characters.");
         }
 
-        return url;
+        return NormalizePageUrl(url);
+    }
+
+    internal Uri NormalizePageUrl(Uri url)
+    {
+        string path = url.AbsolutePath.TrimEnd('/');
+        if (_options.AppendTrailingSlash || path.Length == 0)
+        {
+            path += "/";
+        }
+
+        Uri canonical = new(url.GetLeftPart(UriPartial.Authority) + path + url.Query);
+        if (canonical.AbsoluteUri.Length >= 2048)
+        {
+            throw new InvalidOperationException($"Canonical page URL must be shorter than 2048 characters after applying the trailing slash policy: {canonical.AbsoluteUri}.");
+        }
+
+        return canonical;
     }
 
     private IRouteConstraint Resolve(string policy)

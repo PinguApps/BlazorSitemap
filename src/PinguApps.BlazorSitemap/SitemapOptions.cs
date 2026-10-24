@@ -15,6 +15,9 @@ public sealed partial class SitemapOptions
     /// <summary>Gets or sets the public HTTP(S) base URL, including any application path base. Never taken from request headers.</summary>
     public string PublicBaseUrl { get; set; } = "";
 
+    /// <summary>Gets or sets whether page URLs end with one slash. Default: false (omit trailing slashes). The domain root stays /; sitemap document endpoints are unchanged.</summary>
+    public bool AppendTrailingSlash { get; set; }
+
     /// <summary>Gets or sets whether static pages use embedded source-change estimates. Default: true. Supplied dates take precedence.</summary>
     public bool UseSourceLastModified { get; set; } = true;
 

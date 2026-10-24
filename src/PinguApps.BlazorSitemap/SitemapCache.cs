@@ -128,7 +128,7 @@ public sealed partial class SitemapCache : IDisposable
             foreach (SitemapUrlEntry entry in registration.Entries)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                AddEntry(new CanonicalEntry(null, entry.Resolve(_catalog.BaseUrl), entry.LastModified, null, null));
+                AddEntry(new CanonicalEntry(null, _catalog.NormalizePageUrl(entry.Resolve(_catalog.BaseUrl)), entry.LastModified, null, null));
             }
         }
 
@@ -137,7 +137,7 @@ public sealed partial class SitemapCache : IDisposable
             await foreach (SitemapUrlEntry entry in provider.GetEntriesAsync(cancellationToken).WithCancellation(cancellationToken))
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                AddEntry(new CanonicalEntry(null, entry.Resolve(_catalog.BaseUrl), entry.LastModified, null, null));
+                AddEntry(new CanonicalEntry(null, _catalog.NormalizePageUrl(entry.Resolve(_catalog.BaseUrl)), entry.LastModified, null, null));
             }
         }
 

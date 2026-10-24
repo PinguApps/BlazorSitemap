@@ -16,6 +16,7 @@ public static class DemoHost
         builder.Services.AddBlazorSitemap<App>(options =>
         {
             options.PublicBaseUrl = builder.Configuration["Sitemap:PublicBaseUrl"]!;
+            options.AppendTrailingSlash = builder.Configuration.GetValue("Sitemap:AppendTrailingSlash", false);
             options.UseSourceLastModified = builder.Configuration.GetValue("Sitemap:UseSourceLastModified", true);
             options.Locales(SupportedLocales.All, xDefaultLocale: "en-gb");
             options.AddAssembly(typeof(LibraryPage).Assembly);
