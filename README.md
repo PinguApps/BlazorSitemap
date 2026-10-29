@@ -10,6 +10,8 @@ For **.NET 10, server-hosted Blazor**, including Interactive Auto. The public na
 
 For AI-assisted integration, use the [repository skill](skills/setup-blazor-sitemaps/SKILL.md). Workflow maintainers can refer to the [automation reconciliation](docs/github-workflows.md).
 
+Releases use full [semantic versions](https://semver.org/): GitHub names and tags such as `v2.0.1`, and NuGet versions such as `2.0.1`. Release automation rejects abbreviated versions such as `v2` and `v2.0`.
+
 ## Get a sitemap running
 
 Install the package in your server project:

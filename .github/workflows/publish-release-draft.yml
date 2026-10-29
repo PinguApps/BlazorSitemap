@@ -53,15 +53,15 @@ jobs:
             exit 1
           fi
 
-          draft=$(jq -r '[.[] | select(.draft)] | if length == 0 then empty else .[0] | [.id, .tag_name] | @tsv end' <<< "$releases")
+          draft=$(jq -r '[.[] | select(.draft)] | if length == 0 then empty else .[0] | [.id, .tag_name, .name] | @tsv end' <<< "$releases")
           if [[ -z "$draft" ]]; then
             echo "No release draft available"
             exit 0
           fi
 
-          IFS=$'\t' read -r draft_id draft_tag <<< "$draft"
-          if [[ ! "$draft_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] ||
-             [[ "$draft_tag" == "$latest_tag" ]] ||
+          IFS=$'\t' read -r draft_id draft_tag draft_name <<< "$draft"
+          pwsh -NoProfile -File ./eng/Get-ReleaseVersion.ps1 -Tag "$draft_tag" -Name "$draft_name" -Stable
+          if [[ "$draft_tag" == "$latest_tag" ]] ||
              [[ $(printf '%s\n' "$latest_tag" "$draft_tag" | sort -V | tail -n 1) != "$draft_tag" ]]; then
             echo "Draft tag $draft_tag is not newer than $latest_tag" >&2
             exit 1
