@@ -24,10 +24,10 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
 
     steps:
-      - name: Checkout
+      - name: Checkout release tooling
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: refs/tags/${{ github.event.release.tag_name || inputs.tag }}
+          ref: ${{ github.workflow_sha }}
 
       - name: Resolve package version
         shell: pwsh
@@ -40,6 +40,11 @@ jobs:
           if ($env:RELEASE_EVENT -eq 'release') { $parameters.Name = $env:RELEASE_NAME }
           $version = ./eng/Get-ReleaseVersion.ps1 @parameters
           "PACKAGE_VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Checkout release source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: refs/tags/${{ github.event.release.tag_name || inputs.tag }}
 
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6

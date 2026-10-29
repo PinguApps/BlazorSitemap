@@ -13,7 +13,9 @@ The automation follows `PinguApps/Aspire.Hosting.PostgreSQL.Railway`'s six-workf
 
 The release-drafter configuration and PR categorisation template also match the reference repository. Labels include release-size choices and feature, bug, docs, security and meta categories.
 
-Release names and tags must match exactly, for example `v2.0.1`. The shared validator requires all three version components, rejects leading zeroes and malformed prerelease/build identifiers, and returns the package version without `v`. Explicit package publishing supports SemVer prereleases and build metadata (NuGet normalizes build metadata out of package identity). Scheduled draft publication retains its stable-only policy and validates both name and tag **before** making the release public. Abbreviated names such as `v2` fail even when the tag is complete. Gherkin release-version scenarios run the same validator as the workflows.
+Release names and tags must match exactly, for example `v2.0.1`. The shared validator requires all three version components, rejects leading zeroes and malformed prerelease/build identifiers, and returns the package version without `v`. Explicit package publishing supports SemVer prereleases and build metadata (NuGet normalizes build metadata out of package identity). Scheduled draft publication retains its stable-only policy and validates both name and tag **before** making the release public. Abbreviated names such as `v2` and empty names fail even when the tag is complete. Gherkin release-version scenarios run the same validator as the workflows.
+
+Package publishing loads the validator from the workflow's own revision before checking out the requested tag for building. Explicit dispatch can therefore republish older tags that predate the validator.
 
 GitHub's manual release editor can bypass repository workflows when making a release public. Package publication rejects an invalid release event; maintainers must use a complete matching name and tag in that editor too.
 
