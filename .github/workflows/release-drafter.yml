@@ -15,7 +15,18 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
       - name: Update release draft
+        id: draft
         uses: release-drafter/release-drafter@72967cdc98ddd3160f1fc3dff619de365e137dd0 # v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate draft version
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ steps.draft.outputs.tag_name }}
+          RELEASE_NAME: ${{ steps.draft.outputs.name }}
+        run: ./eng/Get-ReleaseVersion.ps1 -Tag $env:RELEASE_TAG -Name $env:RELEASE_NAME
