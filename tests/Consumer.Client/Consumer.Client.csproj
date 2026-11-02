@@ -3,7 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.1</SitemapPackageVersion>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">2.0.1</SitemapPackageVersion>
     <IsPackable>false</IsPackable>
     <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
   </PropertyGroup>

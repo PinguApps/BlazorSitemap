@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
-    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">1.0.1</SitemapPackageVersion>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">2.0.1</SitemapPackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
