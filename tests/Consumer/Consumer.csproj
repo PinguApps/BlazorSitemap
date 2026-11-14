@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework Condition="'$(SitemapConsumerTargetFramework)' != ''">$(SitemapConsumerTargetFramework)</TargetFramework>
+    <TargetFramework Condition="'$(SitemapConsumerTargetFramework)' == ''">net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">2.0.2</SitemapPackageVersion>
