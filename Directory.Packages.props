@@ -7,14 +7,18 @@
   <ItemGroup>
     <PackageVersion Include="PinguApps.BlazorSitemap" Version="$(SitemapPackageVersion)" />
     <PackageVersion Include="PinguApps.BlazorSitemap.Abstractions" Version="$(SitemapPackageVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="10.0.15" Condition="'$(TargetFramework)' != 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components" Version="11.0.0" Condition="'$(TargetFramework)' == 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.15" Condition="'$(TargetFramework)' != 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="11.0.0" Condition="'$(TargetFramework)' == 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.15" Condition="'$(TargetFramework)' != 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="11.0.0" Condition="'$(TargetFramework)' == 'net11.0'" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="11.0.100" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="Reqnroll.xunit.v3" Version="3.3.4" />
     <PackageVersion Include="xunit.v3" Version="4.0.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="11.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="10.0.15" Condition="'$(TargetFramework)' != 'net11.0'" />
+    <PackageVersion Include="Microsoft.AspNetCore.TestHost" Version="11.0.0" Condition="'$(TargetFramework)' == 'net11.0'" />
   </ItemGroup>
 </Project>

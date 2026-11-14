@@ -2,5 +2,25 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>PinguApps/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Keep the public net10.0 library dependency floor; net11.0 consumer references are selected separately.",
+      "matchPackageNames": [
+        "/^Microsoft\\.AspNetCore\\./"
+      ],
+      "matchCurrentVersion": "/^10\\./",
+      "allowedVersions": "<11"
+    },
+    {
+      "description": "Install the .NET 10 SDK alongside global.json for the retained net10.0 packed consumer contract.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "dotnet-sdk"
+      ],
+      "allowedVersions": "<11"
+    }
   ]
 }

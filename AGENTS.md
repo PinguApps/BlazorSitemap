@@ -19,3 +19,5 @@ For API or behavior changes, update the README and executable consumer examples 
 # Release boundary
 
 Local verification produces ignored artifacts. Publishing requires an intentional release/tag workflow and configured NuGet trusted publishing. The scheduled draft workflow is Sunday 09:39 UTC; local work must not invoke it. Implementation and verification alone do not authorize publishing or creating a release.
+
+Keep published packages on net10.0. `eng/Verify.ps1` packs those artifacts once and verifies consumers under net10.0 and net11.0; conditional ASP.NET package versions follow the consumer target.

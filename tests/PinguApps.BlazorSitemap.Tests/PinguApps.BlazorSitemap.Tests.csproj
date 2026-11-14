@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework Condition="'$(SitemapConsumerTargetFramework)' != ''">$(SitemapConsumerTargetFramework)</TargetFramework>
     <IsTestProject>true</IsTestProject>
     <OutputType>Exe</OutputType>
   </PropertyGroup>

@@ -19,9 +19,11 @@ try {
   <packageSourceMapping><packageSource key="packed-package"><package pattern="PinguApps.BlazorSitemap*" /></packageSource><packageSource key="nuget.org"><package pattern="*" /></packageSource></packageSourceMapping>
 </configuration>
 "@ | Set-Content -LiteralPath $config -Encoding utf8
-    # An isolated package cache proves the consumer restores the newly packed artifact, never an older global copy.
-    $packageCache = Join-Path $repoRoot ('artifacts/nuget/' + [Guid]::NewGuid().ToString('N'))
-    dotnet restore BlazorSitemap.slnx --configfile $config --packages $packageCache "-p:SitemapPackageVersion=$PackageVersion"
-    dotnet test --solution BlazorSitemap.slnx -c Release --no-restore "-p:SitemapPackageVersion=$PackageVersion" --report-xunit-trx --report-xunit-trx-filename test-results.trx --results-directory TestResults
+    # Pack net10.0 once, then exercise the same artifacts from both consumer runtimes.
+    foreach ($framework in @('net10.0', 'net11.0')) {
+        $packageCache = Join-Path $repoRoot ('artifacts/nuget/' + [Guid]::NewGuid().ToString('N'))
+        dotnet restore BlazorSitemap.slnx --configfile $config --packages $packageCache "-p:SitemapPackageVersion=$PackageVersion" "-p:SitemapConsumerTargetFramework=$framework"
+        dotnet test --solution BlazorSitemap.slnx -c Release --no-restore "-p:SitemapPackageVersion=$PackageVersion" "-p:SitemapConsumerTargetFramework=$framework" --report-xunit-trx --report-xunit-trx-filename "test-results-$framework.trx" --results-directory TestResults
+    }
 }
 finally { Pop-Location }
