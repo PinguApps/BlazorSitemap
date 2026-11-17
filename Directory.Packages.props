@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">2.0.2</SitemapPackageVersion>
+    <SitemapPackageVersion Condition="'$(SitemapPackageVersion)' == ''">2.0.3</SitemapPackageVersion>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
